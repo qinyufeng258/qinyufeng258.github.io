@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cyberpunk.top/"/>
-  <updated>2016-04-06T13:48:58.000Z</updated>
+  <updated>2016-04-07T15:46:28.000Z</updated>
   <id>http://cyberpunk.top/</id>
   
   <author>
@@ -14,6 +14,229 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《Javascript 高等程序设计》第21章 Ajax 与 Comet</title>
+    <link href="http://cyberpunk.top/2016/04/07/%E3%80%8AJavascript-%E9%AB%98%E7%AD%89%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%AC21%E7%AB%A0-Ajax-%E4%B8%8E-Comet/"/>
+    <id>http://cyberpunk.top/2016/04/07/《Javascript-高等程序设计》第21章-Ajax-与-Comet/</id>
+    <published>2016-04-07T15:28:46.000Z</published>
+    <updated>2016-04-07T15:46:28.000Z</updated>
+    
+    <content type="html">&lt;p&gt;IE6及更早期版本的写法不做考虑，上一个时代的东西就随时代而去吧:P&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ajax：Asynchronous JavaScript And XML ，其核心是XMLHttpRequest对象（XHR）&lt;br&gt;注：Ajax通信与数据格式无关，不一定是XML数据&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;1、XMLHttpRequest-1级&quot;&gt;&lt;a href=&quot;#1、XMLHttpRequest-1级&quot; class=&quot;headerlink&quot; title=&quot;1、XMLHttpRequest 1级&quot;&gt;&lt;/a&gt;1、XMLHttpRequest 1级&lt;/h2&gt;&lt;h3 id=&quot;1-1、XHR用法：&quot;&gt;&lt;a href=&quot;#1-1、XHR用法：&quot; class=&quot;headerlink&quot; title=&quot;1.1、XHR用法：&quot;&gt;&lt;/a&gt;1.1、XHR用法：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;创建XHR：&lt;strong&gt;var xhr = new XMLHttpRequest();&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;启动一个请求：&lt;strong&gt;xhr.open(“get”, “index.php”, false);&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;参数为：发送请求类型、请求的URL、是否异步发送请求&lt;/li&gt;
+&lt;li&gt;不会发送请求，而是准备发送&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;发送请求：&lt;strong&gt;xhr.send();&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;参数为：请求主体的数据，没有需传入null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;响应数据：响应数据会返回给xhr对象，属性为：&lt;ul&gt;
+&lt;li&gt;responseText：响应主体文本&lt;/li&gt;
+&lt;li&gt;responseXML：若响应内容类型是“text/xml”或“application/xml”，则包含响应数据的XML DOM 文档&lt;/li&gt;
+&lt;li&gt;status：响应的HTTP状态&lt;/li&gt;
+&lt;li&gt;statusText：HTTP状态说明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;同步请求：检查响应状态并做相应处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Sync method&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XMLHttpRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.open(&lt;span class=&quot;string&quot;&gt;&quot;get&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;index.txt&quot;&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.send(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((xhr.status &amp;gt;= &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt; &amp;amp;&amp;amp; xhr.status &amp;lt; &lt;span class=&quot;number&quot;&gt;300&lt;/span&gt;) || xhr.status == &lt;span class=&quot;number&quot;&gt;304&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(xhr.responseText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(&lt;span class=&quot;string&quot;&gt;&quot;Request was unsuccessful: &quot;&lt;/span&gt; + xhr.status);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;异步请求：监听并处理&lt;ul&gt;
+&lt;li&gt;readyState属性：表示请求/响应过程阶段&lt;ul&gt;
+&lt;li&gt;0：未初始化&lt;/li&gt;
+&lt;li&gt;1：启动&lt;/li&gt;
+&lt;li&gt;2：发送&lt;/li&gt;
+&lt;li&gt;3：接受&lt;/li&gt;
+&lt;li&gt;4：完成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;根据readyState做处理：跨浏览器兼容性XHR请求——响应&lt;/li&gt;
+&lt;li&gt;xhr.abort()：在接受以前，可以终止异步请求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Async method&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XMLHttpRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.onreadystatechange = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (xhr.readyState == &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((xhr.status &amp;gt;= &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt; &amp;amp;&amp;amp; xhr.status &amp;lt; &lt;span class=&quot;number&quot;&gt;300&lt;/span&gt;) || xhr.status == &lt;span class=&quot;number&quot;&gt;304&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			alert(xhr.responseText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			alert(&lt;span class=&quot;string&quot;&gt;&quot;Request was unsuccessful: &quot;&lt;/span&gt; + xhr.status);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.open(&lt;span class=&quot;string&quot;&gt;&quot;get&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;index.txt&quot;&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.send(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;1-2、HTTP头部信息：&quot;&gt;&lt;a href=&quot;#1-2、HTTP头部信息：&quot; class=&quot;headerlink&quot; title=&quot;1.2、HTTP头部信息：&quot;&gt;&lt;/a&gt;1.2、HTTP头部信息：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;XHR对象提供了操作请求\响应头部信息的方法&lt;ul&gt;
+&lt;li&gt;设定自定义请求头部信息：&lt;strong&gt;setRequestHeader(“myHead”,”myValue”);&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;调用位置：open之后，send之前&lt;/li&gt;
+&lt;li&gt;一般不允许重写默认头部&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;获得响应头部信息：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; myValue = getResponseHeader(“myHead”); &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; allValue = getAllResponseHeaders(); &lt;span class=&quot;comment&quot;&gt;//通常返回格式化的多行文本信息&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;1-3、GET请求-（查询数据请求）&quot;&gt;&lt;a href=&quot;#1-3、GET请求-（查询数据请求）&quot; class=&quot;headerlink&quot; title=&quot;1.3、GET请求 （查询数据请求）&quot;&gt;&lt;/a&gt;1.3、GET请求 （查询数据请求）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;传入open()方法的URL末尾的查询字符串必须经过编码&lt;ul&gt;
+&lt;li&gt;例子：&lt;strong&gt;xhr.open(“get”, ”index.php?a=1&amp;amp;b=2&amp;amp;c=3”, false);&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;辅助函数（向现有URL末尾添加查询字符串）：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//GET function addURLParam&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;addURLParam&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;url, name, value&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	url += (url.indexOf(&lt;span class=&quot;string&quot;&gt;&quot;?&quot;&lt;/span&gt;) == &lt;span class=&quot;number&quot;&gt;-1&lt;/span&gt; ? &lt;span class=&quot;string&quot;&gt;&quot;?&quot;&lt;/span&gt; : &lt;span class=&quot;string&quot;&gt;&quot;&amp;amp;&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	url += &lt;span class=&quot;built_in&quot;&gt;encodeURIComponent&lt;/span&gt;(name) + &lt;span class=&quot;string&quot;&gt;&quot;=&quot;&lt;/span&gt; + &lt;span class=&quot;built_in&quot;&gt;encodeURIComponent&lt;/span&gt;(value);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; url;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;1-4、POST请求-（保存数据请求）&quot;&gt;&lt;a href=&quot;#1-4、POST请求-（保存数据请求）&quot; class=&quot;headerlink&quot; title=&quot;1.4、POST请求 （保存数据请求）&quot;&gt;&lt;/a&gt;1.4、POST请求 （保存数据请求）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;xhr.open(“post”, “index.php”, false);&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;xhr.send();&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;可以传入XML DOM文档，文档经过序列化后作为请求主体被提交到服务器&lt;/li&gt;
+&lt;li&gt;可以传入字符串&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;默认情况下，服务器对POST请求与Web表单的请求不会同等对待，服务端需要有程序读取原始数据来处理，不过可以用XHR模仿表单提交。POST数据格式与查询字符串相同，所以需要将数据变成查询字符串&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这个函数会将user-info表单中的数据序列化之后提交给服务器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//POST function submitData&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;submitData&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XMLHttpRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xhr.onreadystatechange = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (xhr.readyState == &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((xhr.status &amp;gt;= &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt; &amp;amp;&amp;amp; xhr.status &amp;lt; &lt;span class=&quot;number&quot;&gt;300&lt;/span&gt;) || xhr.status == &lt;span class=&quot;number&quot;&gt;304&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				alert(xhr.responseText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				alert(&lt;span class=&quot;string&quot;&gt;&quot;Request was unsuccessful: &quot;&lt;/span&gt; + xhr.status);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xhr.open(&lt;span class=&quot;string&quot;&gt;&quot;post&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;index.php&quot;&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xhr.setRequestHeader(&lt;span class=&quot;string&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;application/x-www-form-urlencoded&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; form = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&quot;user-info&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	xhr.send(serialize(form));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;GET 对比与 POST，速度快2倍，消耗资源少，但是只用于查询或传送少量数据&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;2、XMLHttpRequest-2级-（草案）&quot;&gt;&lt;a href=&quot;#2、XMLHttpRequest-2级-（草案）&quot; class=&quot;headerlink&quot; title=&quot;2、XMLHttpRequest 2级 （草案）&quot;&gt;&lt;/a&gt;2、XMLHttpRequest 2级 （草案）&lt;/h2&gt;&lt;h3 id=&quot;2-1、FormData类型：用于序列化表单或创建与表单格式相同的POST数据&quot;&gt;&lt;a href=&quot;#2-1、FormData类型：用于序列化表单或创建与表单格式相同的POST数据&quot; class=&quot;headerlink&quot; title=&quot;2.1、FormData类型：用于序列化表单或创建与表单格式相同的POST数据&quot;&gt;&lt;/a&gt;2.1、FormData类型：用于序列化表单或创建与表单格式相同的POST数据&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;创建：&lt;strong&gt;var data = new FormData();&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;传参：&lt;strong&gt;data.append(“name”, “Mike”);//传入键值&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;也可以直接传入表单数据的键对值：&lt;strong&gt;data.append(document.forms[0]);&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;发送：&lt;strong&gt;xhr.send(data);&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;*支持较差：IE只支持IE10，对其他浏览器也支持较差&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;2-2、超时设定：&quot;&gt;&lt;a href=&quot;#2-2、超时设定：&quot; class=&quot;headerlink&quot; title=&quot;2.2、超时设定：&quot;&gt;&lt;/a&gt;2.2、超时设定：&lt;/h3&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//timeout&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XMLHttpRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.onreadystatechange = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (xhr.readyState == &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; ((xhr.status &amp;gt;= &lt;span class=&quot;number&quot;&gt;200&lt;/span&gt; &amp;amp;&amp;amp; xhr.status &amp;lt; &lt;span class=&quot;number&quot;&gt;300&lt;/span&gt;) || xhr.status == &lt;span class=&quot;number&quot;&gt;304&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				alert(xhr.responseText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				alert(&lt;span class=&quot;string&quot;&gt;&quot;Request was unsuccessful: &quot;&lt;/span&gt; + xhr.status);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (ex)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;comment&quot;&gt;//由 ontimeout 事件处理程序处理&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.open(&lt;span class=&quot;string&quot;&gt;&quot;get&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;timeout.php&quot;&lt;/span&gt;, &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.timeout = &lt;span class=&quot;number&quot;&gt;1000&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.ontimeout = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(&lt;span class=&quot;string&quot;&gt;&quot;Request did not return in a second&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.send(&lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;支持较差，IE8+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;2-3-、overrideMimeType&quot;&gt;&lt;a href=&quot;#2-3-、overrideMimeType&quot; class=&quot;headerlink&quot; title=&quot;2.3*、overrideMimeType()&quot;&gt;&lt;/a&gt;2.3*、overrideMimeType()&lt;/h3&gt;&lt;hr&gt;
+&lt;h2 id=&quot;3、进度事件&quot;&gt;&lt;a href=&quot;#3、进度事件&quot; class=&quot;headerlink&quot; title=&quot;3、进度事件&quot;&gt;&lt;/a&gt;3、进度事件&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;loadstart：在接受响应数据的第一个字节时触发&lt;/li&gt;
+&lt;li&gt;progress：在接受响应期间不断触发&lt;/li&gt;
+&lt;li&gt;error：在请求发生错误时触发&lt;/li&gt;
+&lt;li&gt;abort：在调用abort()终止请求时触发&lt;/li&gt;
+&lt;li&gt;load：收到完整响应数据时触发&lt;/li&gt;
+&lt;li&gt;loadend：通信完成或error、abort、load后触发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;支持浏览器：F 3.5+、S 4+、Chrome、IOS的Safari、Android的Webkit、Opera、IE8支持load&lt;br&gt;没有浏览器支持loadend&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;3-1、load事件&quot;&gt;&lt;a href=&quot;#3-1、load事件&quot; class=&quot;headerlink&quot; title=&quot;3.1、load事件&quot;&gt;&lt;/a&gt;3.1、load事件&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Firefox、Opera、Chrome、Safari 支持load事件&lt;/li&gt;
+&lt;li&gt;与readstatechange用法一致。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;3-2、progress事件&quot;&gt;&lt;a href=&quot;#3-2、progress事件&quot; class=&quot;headerlink&quot; title=&quot;3.2、progress事件&quot;&gt;&lt;/a&gt;3.2、progress事件&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;可以做进度条:P&lt;/li&gt;
+&lt;li&gt;onprogress 事件处理程序会收到一个event对象，其target属性是XHR对象，同时包含三个额外属性&lt;ul&gt;
+&lt;li&gt;lengthComputable：表示进度信息是否可用的布尔值&lt;/li&gt;
+&lt;li&gt;position：表示已经接受的字节数&lt;/li&gt;
+&lt;li&gt;totalSize：表示响应头部Content-Length预期的字节数&lt;/li&gt;
+&lt;li&gt;代码：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//progress&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xhr.onprogress = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;event&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; divStatus = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.getElementById(&lt;span class=&quot;string&quot;&gt;&quot;status&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (event.lengthComputable) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		divStatus.innerHTML = &lt;span class=&quot;string&quot;&gt;&quot;Received &quot;&lt;/span&gt; + event.position + &lt;span class=&quot;string&quot;&gt;&quot; of &quot;&lt;/span&gt; + &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			event.totalSize + &lt;span class=&quot;string&quot;&gt;&quot;bytes&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;blockquote&gt;
+&lt;p&gt;事件处理程序都是放在open之前的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;4、跨域资源共享&quot;&gt;&lt;a href=&quot;#4、跨域资源共享&quot; class=&quot;headerlink&quot; title=&quot;4、跨域资源共享&quot;&gt;&lt;/a&gt;4、跨域资源共享&lt;/h2&gt;&lt;p&gt;CORS (跨域资源共享），定义了在必须访问跨域资源时，浏览器与服务器该如何通信。&lt;br&gt;基本思想就是使用自定义的头部信息让浏览器与服务器进行沟通&lt;br&gt;一个简单的GET\POST请求，没有自定义头部，附加一个额外的Origin头部（协议、域名与端口），服务器可以根据头部信息来决定是否给予响应。&lt;br&gt;Origin：&lt;a href=&quot;http://www.lalala.net&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.lalala.net&lt;/a&gt;&lt;br&gt;如果服务器认为可以接受，就在Access-Control-Allow-Origin头部中发送相同源信息。&lt;/p&gt;
+&lt;h3 id=&quot;4-1、IE中的CORS&quot;&gt;&lt;a href=&quot;#4-1、IE中的CORS&quot; class=&quot;headerlink&quot; title=&quot;4.1、IE中的CORS&quot;&gt;&lt;/a&gt;4.1、IE中的CORS&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;XDR（XDomainRequest）&lt;ul&gt;
+&lt;li&gt;cookie不会发送和返回&lt;/li&gt;
+&lt;li&gt;只能设置请求头部的content-type字段&lt;/li&gt;
+&lt;li&gt;不能访问响应头部&lt;/li&gt;
+&lt;li&gt;只支持GET和POST&lt;/li&gt;
+&lt;li&gt;支持timeout属性和ontimeout事件处理程序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//CORS IN IE&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xdr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XDomainRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xdr.onload = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(xdr.responseText);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xdr.onerror = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(&lt;span class=&quot;string&quot;&gt;&quot;An error occourred&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xdr.open(&lt;span class=&quot;string&quot;&gt;&quot;post&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;http://www.cyberpunk.top/about&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xdr.contentType = &lt;span class=&quot;string&quot;&gt;&quot;application/x-www-form-urlencoded&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xdr.send(&lt;span class=&quot;string&quot;&gt;&quot;name1=value&amp;amp;name2=value2&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;4-2、其他浏览器的CORS&quot;&gt;&lt;a href=&quot;#4-2、其他浏览器的CORS&quot; class=&quot;headerlink&quot; title=&quot;4.2、其他浏览器的CORS&quot;&gt;&lt;/a&gt;4.2、其他浏览器的CORS&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;与普通的XHR相同，URL为绝对URL&lt;/li&gt;
+&lt;li&gt;限制&lt;ul&gt;
+&lt;li&gt;不能自定义头部&lt;/li&gt;
+&lt;li&gt;cookie不会发送和返回&lt;/li&gt;
+&lt;li&gt;getAllResponseHeaders 总是返回空字符串&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;4-3、Preflighted-Requests&quot;&gt;&lt;a href=&quot;#4-3、Preflighted-Requests&quot; class=&quot;headerlink&quot; title=&quot;4.3、Preflighted Requests&quot;&gt;&lt;/a&gt;4.3、Preflighted Requests&lt;/h5&gt;&lt;h5 id=&quot;4-4、带凭据的请求&quot;&gt;&lt;a href=&quot;#4-4、带凭据的请求&quot; class=&quot;headerlink&quot; title=&quot;4.4、带凭据的请求&quot;&gt;&lt;/a&gt;4.4、带凭据的请求&lt;/h5&gt;&lt;h3 id=&quot;4-5、跨浏览器的CORS解决方案&quot;&gt;&lt;a href=&quot;#4-5、跨浏览器的CORS解决方案&quot; class=&quot;headerlink&quot; title=&quot;4.5、跨浏览器的CORS解决方案&quot;&gt;&lt;/a&gt;4.5、跨浏览器的CORS解决方案&lt;/h3&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Compatible CORS CODE&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;createCORSRequest&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;method, url&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XMLHttpRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (&lt;span class=&quot;string&quot;&gt;&quot;withCredentials&quot;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; xhr) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		xhr.open(method, url, &lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (tyepof XDomainRequest != &lt;span class=&quot;string&quot;&gt;&quot;undefined&quot;&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		xhr = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XDomainRequest();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		xhr.open(method, url);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125; &lt;span class=&quot;keyword&quot;&gt;else&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		xhr = &lt;span class=&quot;literal&quot;&gt;null&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; xhr;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; request = createCORSRequest(&lt;span class=&quot;string&quot;&gt;&quot;get&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;http://cyberpunk.top&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (request) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	request.onload = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&lt;span class=&quot;comment&quot;&gt;//对request.responseText 进行处理	&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	request.send();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;5、一些好玩的跨域技术&quot;&gt;&lt;a href=&quot;#5、一些好玩的跨域技术&quot; class=&quot;headerlink&quot; title=&quot;5、一些好玩的跨域技术&quot;&gt;&lt;/a&gt;5、一些好玩的跨域技术&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;图片ping&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常用于跟踪用户点击页面或动态广告曝光次数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Image Ping&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; img = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Image();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;img.onload = img.onerror = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(&lt;span class=&quot;string&quot;&gt;&quot;Done&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;img.src = &lt;span class=&quot;string&quot;&gt;&quot;http://wwww.cyberpunk.top&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;JSONP （JSON with Padding）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;回调函数就是响应到来时应该在页面上调用的函数&lt;/li&gt;
+&lt;li&gt;数据就是回调函数传入的JSON数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//JSONP&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;handleResponse&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;res&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	alert(&lt;span class=&quot;string&quot;&gt;&quot;You&#39;re ar IP address &quot;&lt;/span&gt; + res.ip + &lt;span class=&quot;string&quot;&gt;&quot;, which is in &quot;&lt;/span&gt; + res.city + &lt;span class=&quot;string&quot;&gt;&quot;, &quot;&lt;/span&gt; + res.region_name);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; script = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.createElement(&lt;span class=&quot;string&quot;&gt;&quot;script&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;script.src = &lt;span class=&quot;string&quot;&gt;&quot;http://freegeoip.net/json?callback=handleResponse&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.body.insertBefore(script, docmuent.body.firstChild);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Comet （服务器向页面推送数据）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;长轮询：页面发送一个到服务器的请求，然后服务器一直保持连接打开&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;流：在整个页面的生命周期内只使用一个HTTP连接&lt;br&gt;&lt;img src=&quot;/uploads/js2101.png&quot; alt=&quot;长轮询&quot;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;WebSockets&lt;/li&gt;
+&lt;li&gt;SSE&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;IE6及更早期版本的写法不做考虑，上一个时代的东西就随时代而去吧:P&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ajax：Asynchronous JavaScript And XML ，其核心是XMLHttpRequest对象（XHR）&lt;br&gt;注：Ajax通信与数据格式无关，不一定是XML数据&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;1、XMLHttpRequest-1级&quot;&gt;&lt;a href=&quot;#1、XMLHttpRequest-1级&quot; class=&quot;headerlink&quot; title=&quot;1、XMLHttpRequest 1级&quot;&gt;&lt;/a&gt;1、XMLHttpRequest 1级&lt;/h2&gt;&lt;h3 id=&quot;1-1、XHR用法：&quot;&gt;&lt;a href=&quot;#1-1、XHR用法：&quot; class=&quot;headerlink&quot; title=&quot;1.1、XHR用法：&quot;&gt;&lt;/a&gt;1.1、XHR用法：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;创建XHR：&lt;strong&gt;var xhr = new XMLHttpRequest();&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;启动一个请求：&lt;strong&gt;xhr.open(“get”, “index.php”, false);&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;参数为：发送请求类型、请求的URL、是否异步发送请求&lt;/li&gt;
+&lt;li&gt;不会发送请求，而是准备发送&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;发送请求：&lt;strong&gt;xhr.send();&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;参数为：请求主体的数据，没有需传入null&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;响应数据：响应数据会返回给xhr对象，属性为：&lt;ul&gt;
+&lt;li&gt;responseText：响应主体文本&lt;/li&gt;
+&lt;li&gt;responseXML：若响应内容类型是“text/xml”或“application/xml”，则包含响应数据的XML DOM 文档&lt;/li&gt;
+&lt;li&gt;status：响应的HTTP状态&lt;/li&gt;
+&lt;li&gt;statusText：HTTP状态说明&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;同步请求：检查响应状态并做相应处理&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="WEB前端" scheme="http://cyberpunk.top/categories/WEB%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="《Javascript 高等程序设计》" scheme="http://cyberpunk.top/tags/%E3%80%8AJavascript-%E9%AB%98%E7%AD%89%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>博客2.0版 :P</title>
