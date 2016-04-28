@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cyberpunk.top/"/>
-  <updated>2016-04-26T11:31:08.000Z</updated>
+  <updated>2016-04-28T12:07:10.000Z</updated>
   <id>http://cyberpunk.top/</id>
   
   <author>
@@ -16,11 +16,62 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Virtual Box下Kali Linux系统无法安装Virtual Tools的解决方法</title>
+    <link href="http://cyberpunk.top/2016/04/28/Virtual-Box%E4%B8%8BKali-Linux%E7%B3%BB%E7%BB%9F%E6%97%A0%E6%B3%95%E5%AE%89%E8%A3%85Virtual-Tools%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://cyberpunk.top/2016/04/28/Virtual-Box下Kali-Linux系统无法安装Virtual-Tools的解决方法/</id>
+    <published>2016-04-28T11:55:54.000Z</published>
+    <updated>2016-04-28T12:07:10.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;背景：Kali-Linux-2-0-（32位）&quot;&gt;&lt;a href=&quot;#背景：Kali-Linux-2-0-（32位）&quot; class=&quot;headerlink&quot; title=&quot;背景：Kali Linux 2.0 （32位）&quot;&gt;&lt;/a&gt;背景：Kali Linux 2.0 （32位）&lt;/h2&gt;&lt;h3 id=&quot;安装Virtual-Tools时&quot;&gt;&lt;a href=&quot;#安装Virtual-Tools时&quot; class=&quot;headerlink&quot; title=&quot;安装Virtual Tools时&quot;&gt;&lt;/a&gt;安装Virtual Tools时&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;复制桌面Virtual Tools光盘里面的“VBoxlinuxAdditions.run”文件到根目录root文件里，将权限改为(读写)&lt;/li&gt;
+&lt;li&gt;终端输入&lt;code&gt;./VBoxlinuxAdditions.run&lt;/code&gt;，运行后出现若干语句，其中提示：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Building the main Guest Additions module . . . failed &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;//即安装失败&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;经Google搜索后，原因为缺失Linux-内核头文件&quot;&gt;&lt;a href=&quot;#经Google搜索后，原因为缺失Linux-内核头文件&quot; class=&quot;headerlink&quot; title=&quot;经Google搜索后，原因为缺失Linux 内核头文件&quot;&gt;&lt;/a&gt;经Google搜索后，原因为缺失Linux 内核头文件&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;首先更新源，换163或阿里云的源，&lt;/li&gt;
+&lt;li&gt;然后采用apt-get update &amp;amp;&amp;amp; apt-get install -y linux-headers-$(uname -r)命令安装内核头文件，结果提示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;正在读取软件包列表… 完成&lt;/p&gt;
+&lt;p&gt;正在分析软件包的依赖关系树&lt;/p&gt;
+&lt;p&gt;正在读取状态信息… 完成&lt;/p&gt;
+&lt;p&gt;E: 未发现软件包 linux-headers-4.3.0-kali1-686-pae&lt;/p&gt;
+&lt;p&gt;E: 无法按照正则表达式 linux-headers-4.3.0-kali1-686-pae 找到任何软件包&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;直接apt-get-install-linux-headers-4-3-0-kali1-686-pae获取文件失败，提示同样错误信息&quot;&gt;&lt;a href=&quot;#直接apt-get-install-linux-headers-4-3-0-kali1-686-pae获取文件失败，提示同样错误信息&quot; class=&quot;headerlink&quot; title=&quot;直接apt-get install linux-headers-4.3.0-kali1-686-pae获取文件失败，提示同样错误信息&quot;&gt;&lt;/a&gt;直接apt-get install linux-headers-4.3.0-kali1-686-pae获取文件失败，提示同样错误信息&lt;/h3&gt;&lt;h3 id=&quot;具体原因是因为当前版本Kali-linux的源内不再包含上述头文件&quot;&gt;&lt;a href=&quot;#具体原因是因为当前版本Kali-linux的源内不再包含上述头文件&quot; class=&quot;headerlink&quot; title=&quot;具体原因是因为当前版本Kali linux的源内不再包含上述头文件&quot;&gt;&lt;/a&gt;具体原因是因为当前版本Kali linux的源内不再包含上述头文件&lt;/h3&gt;&lt;h2 id=&quot;具体解决方案：&quot;&gt;&lt;a href=&quot;#具体解决方案：&quot; class=&quot;headerlink&quot; title=&quot;具体解决方案：&quot;&gt;&lt;/a&gt;具体解决方案：&lt;/h2&gt;&lt;p&gt;于是&lt;strong&gt;手动下载内核头文件&lt;/strong&gt;以及&lt;strong&gt;相关依赖包&lt;/strong&gt;后使用dpkg命令安装上（&lt;strong&gt;注意顺序&lt;/strong&gt;）&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;dpkg -i linux-headers-4.3.0-kali1-common_4.3.3-5kali4_i386&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dpkg -i linux-kbuild-4.3_4.3.1-2kali1_i386&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;dpkg -i linux-headers-4.3.0-kali1-686-pae_4.3.3-5kali4_i386&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;然后再次输入&lt;code&gt;./VBoxlinuxAdditions.run&lt;/code&gt;后，Virtual Tools成功安装&lt;/p&gt;
+&lt;p&gt;内核头文件以及相关依赖包下载地址：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://http.kali.org/kali/pool/main/l/linux/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://http.kali.org/kali/pool/main/l/linux/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://http.kali.org/kali/pool/main/l/linux-tools/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://http.kali.org/kali/pool/main/l/linux-tools/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;顺带一提，&quot;&gt;&lt;a href=&quot;#顺带一提，&quot; class=&quot;headerlink&quot; title=&quot;顺带一提，&quot;&gt;&lt;/a&gt;顺带一提，&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Paraellels Desktop的增强工具解决方案差不多，都是缺少内核头文件导致安装失败&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;而VMware 则Kali 官方提供了VM tools安装方法。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;总结：&quot;&gt;&lt;a href=&quot;#总结：&quot; class=&quot;headerlink&quot; title=&quot;总结：&quot;&gt;&lt;/a&gt;总结：&lt;/h2&gt;&lt;p&gt;百度不靠谱，很多问题解决方法都是重复而且无效的，自己手动一个个剖析问题，找到问题的突破口，然后在Google这些突破点，最终解决了问题。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;背景：Kali-Linux-2-0-（32位）&quot;&gt;&lt;a href=&quot;#背景：Kali-Linux-2-0-（32位）&quot; class=&quot;headerlink&quot; title=&quot;背景：Kali Linux 2.0 （32位）&quot;&gt;&lt;/a&gt;背景：Kali Linux 2.0
+    
+    </summary>
+    
+      <category term="Web安全" scheme="http://cyberpunk.top/categories/Web%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="Kali Linux" scheme="http://cyberpunk.top/tags/Kali-Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CSS 定宽高与不定宽高的元素 如何居中</title>
     <link href="http://cyberpunk.top/2016/04/26/CSS-%E5%AE%9A%E5%AE%BD%E9%AB%98%E4%B8%8E%E4%B8%8D%E5%AE%9A%E5%AE%BD%E9%AB%98%E7%9A%84%E5%85%83%E7%B4%A0-%E5%A6%82%E4%BD%95%E5%B1%85%E4%B8%AD/"/>
     <id>http://cyberpunk.top/2016/04/26/CSS-定宽高与不定宽高的元素-如何居中/</id>
     <published>2016-04-26T07:06:59.000Z</published>
-    <updated>2016-04-26T11:31:08.000Z</updated>
+    <updated>2016-04-28T12:07:32.000Z</updated>
     
     <content type="html">&lt;p&gt;网易17届春招实习面试被问到了这题，但是苦于平时积累一般，回答得有很多纰漏，特地整理一下。&lt;/p&gt;
 &lt;hr&gt;
@@ -126,7 +177,7 @@
     
     </summary>
     
-      <category term="WEB前端" scheme="http://cyberpunk.top/categories/WEB%E5%89%8D%E7%AB%AF/"/>
+      <category term="Web前端" scheme="http://cyberpunk.top/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="CSS布局" scheme="http://cyberpunk.top/tags/CSS%E5%B8%83%E5%B1%80/"/>
@@ -138,7 +189,7 @@
     <link href="http://cyberpunk.top/2016/04/07/%E3%80%8AJavascript-%E9%AB%98%E7%AD%89%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%AC21%E7%AB%A0-Ajax-%E4%B8%8E-Comet/"/>
     <id>http://cyberpunk.top/2016/04/07/《Javascript-高等程序设计》第21章-Ajax-与-Comet/</id>
     <published>2016-04-07T15:28:46.000Z</published>
-    <updated>2016-04-26T06:58:36.000Z</updated>
+    <updated>2016-04-28T12:07:20.000Z</updated>
     
     <content type="html">&lt;p&gt;IE6及更早期版本的写法不做考虑，上一个时代的东西就随时代而去吧:P&lt;/p&gt;
 &lt;hr&gt;
@@ -349,7 +400,7 @@
     
     </summary>
     
-      <category term="WEB前端" scheme="http://cyberpunk.top/categories/WEB%E5%89%8D%E7%AB%AF/"/>
+      <category term="Web前端" scheme="http://cyberpunk.top/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="《Javascript 高等程序设计》" scheme="http://cyberpunk.top/tags/%E3%80%8AJavascript-%E9%AB%98%E7%AD%89%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/"/>
@@ -386,7 +437,7 @@
     <link href="http://cyberpunk.top/2016/04/06/%E3%80%8AJavascript-%E9%AB%98%E7%AD%89%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B%E7%AC%AC4%E7%AB%A0-%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%8F%8A%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/"/>
     <id>http://cyberpunk.top/2016/04/06/《Javascript-高等程序设计》第4章-变量、作用域及内存问题/</id>
     <published>2016-04-06T12:58:15.000Z</published>
-    <updated>2016-04-06T13:37:08.000Z</updated>
+    <updated>2016-04-28T12:07:25.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;1、基本类型&quot;&gt;&lt;a href=&quot;#1、基本类型&quot; class=&quot;headerlink&quot; title=&quot;1、基本类型&quot;&gt;&lt;/a&gt;1、基本类型&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Undefined、Null、Boolean、Number、String&lt;ul&gt;
@@ -499,7 +550,7 @@
     
     </summary>
     
-      <category term="WEB前端" scheme="http://cyberpunk.top/categories/WEB%E5%89%8D%E7%AB%AF/"/>
+      <category term="Web前端" scheme="http://cyberpunk.top/categories/Web%E5%89%8D%E7%AB%AF/"/>
     
     
       <category term="《Javascript 高等程序设计》" scheme="http://cyberpunk.top/tags/%E3%80%8AJavascript-%E9%AB%98%E7%AD%89%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E3%80%8B/"/>
