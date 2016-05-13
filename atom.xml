@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cyberpunk.top/"/>
-  <updated>2016-04-28T12:08:58.000Z</updated>
+  <updated>2016-05-13T10:13:00.000Z</updated>
   <id>http://cyberpunk.top/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>项目积累：微信端&#39;逅续积分&#39;外包 总结</title>
+    <link href="http://cyberpunk.top/2016/05/13/%E9%A1%B9%E7%9B%AE%E7%A7%AF%E7%B4%AF%EF%BC%9A%E5%BE%AE%E4%BF%A1%E7%AB%AF-%E9%80%85%E7%BB%AD%E7%A7%AF%E5%88%86-%E5%A4%96%E5%8C%85-%E6%80%BB%E7%BB%93/"/>
+    <id>http://cyberpunk.top/2016/05/13/项目积累：微信端-逅续积分-外包-总结/</id>
+    <published>2016-05-13T07:08:37.000Z</published>
+    <updated>2016-05-13T10:13:00.000Z</updated>
+    
+    <content type="html">&lt;h3 id=&quot;项目名称：&quot;&gt;&lt;a href=&quot;#项目名称：&quot; class=&quot;headerlink&quot; title=&quot;项目名称：&quot;&gt;&lt;/a&gt;项目名称：&lt;/h3&gt;&lt;p&gt;逅续积分计划&lt;/p&gt;
+&lt;h3 id=&quot;项目周期：&quot;&gt;&lt;a href=&quot;#项目周期：&quot; class=&quot;headerlink&quot; title=&quot;项目周期：&quot;&gt;&lt;/a&gt;项目周期：&lt;/h3&gt;&lt;p&gt;2016年04月-2016年05月（约2周左右）&lt;/p&gt;
+&lt;h3 id=&quot;项目平台：&quot;&gt;&lt;a href=&quot;#项目平台：&quot; class=&quot;headerlink&quot; title=&quot;项目平台：&quot;&gt;&lt;/a&gt;项目平台：&lt;/h3&gt;&lt;p&gt;移动端、微信端&lt;/p&gt;
+&lt;h4 id=&quot;项目用到的技术：&quot;&gt;&lt;a href=&quot;#项目用到的技术：&quot; class=&quot;headerlink&quot; title=&quot;项目用到的技术：&quot;&gt;&lt;/a&gt;项目用到的技术：&lt;/h4&gt;&lt;p&gt;HTML\CSS\JavaScript、jQuery Mobile框架、jQuery库、微信的CSS样式库等&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;  &lt;/p&gt;
+&lt;h3 id=&quot;项目总结：&quot;&gt;&lt;a href=&quot;#项目总结：&quot; class=&quot;headerlink&quot; title=&quot;项目总结：&quot;&gt;&lt;/a&gt;项目总结：&lt;/h3&gt;&lt;p&gt;按照客户的要求实现了移动端共10个页面，页面布局方式基本就是流式布局，因为考虑到该项目是微信端的，因此可以不用考虑页面分辨率过大而导致原本的行列过度拉伸。&lt;/p&gt;
+&lt;p&gt;该项目的所有页面都在index.html文件中实现，采用jQuery Mobile框架的data-role=“page”，并用元素id进行切换，这样在页面加载和切换上，效率要高于多HTML文件的切换。&lt;/p&gt;
+&lt;p&gt;其他地方没啥好说的，项目中的签到系统是让我比较头疼的地方，在发现网络上的签到\日期插件均无法满足客户提出的需求后，我决定自己写一款签到插件，当月签到状态分为未签到、需要补签、已签到（四个LOGO），以及没有显示，用户可以补签，也可以对当天进行签到，签到后，底部栏出现四个商家LOGO进行选择，点击LOGO后即签到完成，同时Ajax向服务端发送签到数据。&lt;/p&gt;
+&lt;p&gt;总来的说，第一次写移动端，除了兼容性问题几乎不用考虑外，很多地方，比如点击事件（tap）等和PC端不同，需要考虑。&lt;/p&gt;
+&lt;p&gt;最后，&lt;/p&gt;
+&lt;h3 id=&quot;项目展示链接：&quot;&gt;&lt;a href=&quot;#项目展示链接：&quot; class=&quot;headerlink&quot; title=&quot;项目展示链接：&quot;&gt;&lt;/a&gt;项目展示链接：&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://cyberpunk.top/HouxuPoints/&quot;&gt;http://cyberpunk.top/HouxuPoints/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;项目静态展示：&quot;&gt;&lt;a href=&quot;#项目静态展示：&quot; class=&quot;headerlink&quot; title=&quot;项目静态展示：&quot;&gt;&lt;/a&gt;项目静态展示：&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;/uploads/houxu/houxu01.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu02.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu03.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu04.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu05.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu06.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu07.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu08.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu09.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/houxu/houxu10.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;项目名称：&quot;&gt;&lt;a href=&quot;#项目名称：&quot; class=&quot;headerlink&quot; title=&quot;项目名称：&quot;&gt;&lt;/a&gt;项目名称：&lt;/h3&gt;&lt;p&gt;逅续积分计划&lt;/p&gt;
+&lt;h3 id=&quot;项目周期：&quot;&gt;&lt;a href=&quot;#项目周期：&quot; class=&quot;headerlink&quot; title=&quot;项目周期：&quot;&gt;&lt;/a&gt;项目周期：&lt;/h3&gt;&lt;p&gt;2016年04月-2016年05月（约2周左右）&lt;/p&gt;
+&lt;h3 id=&quot;项目平台：&quot;&gt;&lt;a href=&quot;#项目平台：&quot; class=&quot;headerlink&quot; title=&quot;项目平台：&quot;&gt;&lt;/a&gt;项目平台：&lt;/h3&gt;&lt;p&gt;移动端、微信端&lt;/p&gt;
+&lt;h4 id=&quot;项目用到的技术：&quot;&gt;&lt;a href=&quot;#项目用到的技术：&quot; class=&quot;headerlink&quot; title=&quot;项目用到的技术：&quot;&gt;&lt;/a&gt;项目用到的技术：&lt;/h4&gt;&lt;p&gt;HTML\CSS\JavaScript、jQuery Mobile框架、jQuery库、微信的CSS样式库等&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Web前端" scheme="http://cyberpunk.top/categories/Web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="项目积累，外包" scheme="http://cyberpunk.top/tags/%E9%A1%B9%E7%9B%AE%E7%A7%AF%E7%B4%AF%EF%BC%8C%E5%A4%96%E5%8C%85/"/>
+    
+  </entry>
   
   <entry>
     <title>Virtual Box下Kali Linux系统无法安装Virtual Tools的解决方法</title>
