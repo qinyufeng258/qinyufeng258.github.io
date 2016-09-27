@@ -1,0 +1,709 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Javascript知识点系列," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Cyberpunk" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/my_head_s.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="目标：彻底搞清楚String的match、replace、search 和 RegExp的test、exec
+
+一、String的match() 与 RegExp的exec()比较：1、String.prototype.match()
+Syntax:     str.match(regexp)
+Return:     返回整个匹配到的结果 和 所有分组匹配到的结果，若匹配不到，则返回null
+
+如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript 正则函数与字符串函数分析">
+<meta property="og:url" content="http://cyberpunk.top/2016/09/27/Javascript-正则函数与字符串函数分析/index.html">
+<meta property="og:site_name" content="Cyberpunk">
+<meta property="og:description" content="目标：彻底搞清楚String的match、replace、search 和 RegExp的test、exec
+
+一、String的match() 与 RegExp的exec()比较：1、String.prototype.match()
+Syntax:     str.match(regexp)
+Return:     返回整个匹配到的结果 和 所有分组匹配到的结果，若匹配不到，则返回null
+
+如">
+<meta property="og:updated_time" content="2016-09-27T10:38:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript 正则函数与字符串函数分析">
+<meta name="twitter:description" content="目标：彻底搞清楚String的match、replace、search 和 RegExp的test、exec
+
+一、String的match() 与 RegExp的exec()比较：1、String.prototype.match()
+Syntax:     str.match(regexp)
+Return:     返回整个匹配到的结果 和 所有分组匹配到的结果，若匹配不到，则返回null
+
+如">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Javascript 正则函数与字符串函数分析 | Cyberpunk </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-76054919-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Cyberpunk</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Javascript 正则函数与字符串函数分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T18:16:07+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web前端/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/Javascript-正则函数与字符串函数分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/Javascript-正则函数与字符串函数分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>目标：彻底搞清楚String的match、replace、search 和 RegExp的test、exec</p>
+<hr>
+<h2 id="一、String的match-与-RegExp的exec-比较："><a href="#一、String的match-与-RegExp的exec-比较：" class="headerlink" title="一、String的match() 与 RegExp的exec()比较："></a>一、String的match() 与 RegExp的exec()比较：</h2><h3 id="1、String-prototype-match"><a href="#1、String-prototype-match" class="headerlink" title="1、String.prototype.match()"></a>1、String.prototype.match()</h3><ul>
+<li>Syntax:     str.match(regexp)</li>
+<li>Return:     返回整个匹配到的结果 和 所有分组匹配到的结果，若匹配不到，则返回null</li>
+</ul>
+<p>如果regexp不包含g(全局匹配)，则与RegExp.exec(str)的结果一致返回的数组有一个额外的属性input：包含原始匹配的文本还有一个属性index：包含第一次匹配到的文本的下标<br>测试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2012-04-06 12:30:30"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = test_string.match(reg);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;2013&quot;, index: 0, input: &quot;2013-09-20 23:21:05&quot;]</span><br></pre></td></tr></table></figure>
+<p>如果regexp包含g，则返回一个包含所有匹配到的结果的数组<br>测试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/g</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2012-04-06 12:30:30"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = test_string.match(reg);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;2013&quot;, &quot;09&quot;, &quot;20&quot;, &quot;23&quot;, &quot;21&quot;, &quot;05&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。"><a href="#从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。" class="headerlink" title="从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。"></a>从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。</h4><a id="more"></a>
+<h3 id="2、RegExp-prototype-exec"><a href="#2、RegExp-prototype-exec" class="headerlink" title="2、RegExp.prototype.exec()"></a>2、RegExp.prototype.exec()</h3><ul>
+<li>Syntax:     regexObj.exec(str)</li>
+<li><p>Return:     若成功匹配到，则返回一个数组res，然后更新RegExp的属性，比如$index\$1等，若匹配不到则返回null</p>
+</li>
+<li><p>返回的数组内容：</p>
+<ul>
+<li><p>res[0]:     第一次匹配到的文本</p>
+</li>
+<li><p>res[1]…[n]:     分组</p>
+</li>
+<li><p>index:     包含第一次匹配到的文本的下标</p>
+</li>
+<li><p>input:     包含原始匹配的文本</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>测试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/g</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2013-09-20 23:21:05"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = reg.exec(test_string);</span><br><span class="line"><span class="keyword">var</span> res1 = reg.exec(test_string);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br><span class="line"><span class="built_in">console</span>.log(res2);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&quot;2013&quot;, index: 0, input: &quot;2013-09-20 23:21:05&quot;]</span><br><span class="line">[&quot;09&quot;, index: 5, input: &quot;2013-09-20 23:21:05&quot;]</span><br></pre></td></tr></table></figure>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><h4 id="非全局match的结果与exec相同，但是exec-可以多次匹配，match-多次匹配结果相同。"><a href="#非全局match的结果与exec相同，但是exec-可以多次匹配，match-多次匹配结果相同。" class="headerlink" title="非全局match的结果与exec相同，但是exec()可以多次匹配，match()多次匹配结果相同。"></a>非全局match的结果与exec相同，但是exec()可以多次匹配，match()多次匹配结果相同。</h4><h2 id="二、String的search-与-RegExp的test-比较："><a href="#二、String的search-与-RegExp的test-比较：" class="headerlink" title="二、String的search() 与 RegExp的test()比较："></a>二、String的search() 与 RegExp的test()比较：</h2><h3 id="1、String-prototype-search"><a href="#1、String-prototype-search" class="headerlink" title="1、String.prototype.search()"></a>1、String.prototype.search()</h3><ul>
+<li>Syntax:     str.search(regexp)</li>
+<li>Return:     第一次匹配到的文本的下标，若未找到，则返回-1<br>测试结果：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/g</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2013-09-20 23:21:05"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = test_string.search(reg);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0</span><br></pre></td></tr></table></figure>
+<h3 id="2、RegExp-prototype-test"><a href="#2、RegExp-prototype-test" class="headerlink" title="2、RegExp.prototype.test()"></a>2、RegExp.prototype.test()</h3><ul>
+<li>Syntax:     regexObj.test(str)</li>
+<li>Return:     若成功匹配到，则返回true，否则返回false<br>测试结果：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/g</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2013-09-20 23:21:05"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = reg.test(test_string);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
+<h3 id="总结：-1"><a href="#总结：-1" class="headerlink" title="总结："></a>总结：</h3><h4 id="test-与search-类似，仅返回结果上的差异"><a href="#test-与search-类似，仅返回结果上的差异" class="headerlink" title="test()与search()类似，仅返回结果上的差异"></a>test()与search()类似，仅返回结果上的差异</h4><h4 id="而search-与indexOf-类似，但是search的参数对象可以使RegExp，使其功能更强大"><a href="#而search-与indexOf-类似，但是search的参数对象可以使RegExp，使其功能更强大" class="headerlink" title="而search()与indexOf()类似，但是search的参数对象可以使RegExp，使其功能更强大"></a>而search()与indexOf()类似，但是search的参数对象可以使RegExp，使其功能更强大</h4><h3 id="三、String的replace-函数"><a href="#三、String的replace-函数" class="headerlink" title="三、String的replace()函数"></a>三、String的replace()函数</h3><ul>
+<li>Syntax:     str.replace(regexp|str, newStr | function)</li>
+<li>Return:     已经置换完毕的字符新串</li>
+</ul>
+<h3 id="总结：-2"><a href="#总结：-2" class="headerlink" title="总结："></a>总结：</h3><h4 id="replace的强大之处在于可以对满足正则表达式的字符，通过函数，进行自由置换"><a href="#replace的强大之处在于可以对满足正则表达式的字符，通过函数，进行自由置换" class="headerlink" title="replace的强大之处在于可以对满足正则表达式的字符，通过函数，进行自由置换"></a>replace的强大之处在于可以对满足正则表达式的字符，通过函数，进行自由置换</h4><h4 id="replace与match一样，都有全局非全局模式。"><a href="#replace与match一样，都有全局非全局模式。" class="headerlink" title="replace与match一样，都有全局非全局模式。"></a>replace与match一样，都有全局非全局模式。</h4><p>测试用例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/g</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2013-09-20 23:21:05"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = test_string.replace(reg,<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x+<span class="string">"?"</span>;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2013?-09?-20? 23?:21?:05?</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript知识点系列/" rel="tag">#Javascript知识点系列</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/13/项目积累：微信端-逅续积分-外包-总结/" rel="next" title="项目积累：微信端'逅续积分'外包 总结">
+                <i class="fa fa-chevron-left"></i> 项目积累：微信端'逅续积分'外包 总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/27/Javascript-正则函数与字符串函数分析/"
+           data-title="Javascript 正则函数与字符串函数分析" data-url="http://cyberpunk.top/2016/09/27/Javascript-正则函数与字符串函数分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Cyberpunk" />
+          <p class="site-author-name" itemprop="name">Cyberpunk</p>
+          <p class="site-description motion-element" itemprop="description">I am not a designer nor a coder. I'm just a guy with a point-of-view and a computer.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/qinyufeng258" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/CyberpunkYff" target="_blank">
+                  
+                    <i class="fa fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://example.com/" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、String的match-与-RegExp的exec-比较："><span class="nav-number">1.</span> <span class="nav-text">一、String的match() 与 RegExp的exec()比较：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、String-prototype-match"><span class="nav-number">1.1.</span> <span class="nav-text">1、String.prototype.match()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。"><span class="nav-number">1.1.1.</span> <span class="nav-text">从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、RegExp-prototype-exec"><span class="nav-number">1.2.</span> <span class="nav-text">2、RegExp.prototype.exec()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">1.3.</span> <span class="nav-text">总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非全局match的结果与exec相同，但是exec-可以多次匹配，match-多次匹配结果相同。"><span class="nav-number">1.3.1.</span> <span class="nav-text">非全局match的结果与exec相同，但是exec()可以多次匹配，match()多次匹配结果相同。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、String的search-与-RegExp的test-比较："><span class="nav-number">2.</span> <span class="nav-text">二、String的search() 与 RegExp的test()比较：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、String-prototype-search"><span class="nav-number">2.1.</span> <span class="nav-text">1、String.prototype.search()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、RegExp-prototype-test"><span class="nav-number">2.2.</span> <span class="nav-text">2、RegExp.prototype.test()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结：-1"><span class="nav-number">2.3.</span> <span class="nav-text">总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#test-与search-类似，仅返回结果上的差异"><span class="nav-number">2.3.1.</span> <span class="nav-text">test()与search()类似，仅返回结果上的差异</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#而search-与indexOf-类似，但是search的参数对象可以使RegExp，使其功能更强大"><span class="nav-number">2.3.2.</span> <span class="nav-text">而search()与indexOf()类似，但是search的参数对象可以使RegExp，使其功能更强大</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、String的replace-函数"><span class="nav-number">2.4.</span> <span class="nav-text">三、String的replace()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结：-2"><span class="nav-number">2.5.</span> <span class="nav-text">总结：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#replace的强大之处在于可以对满足正则表达式的字符，通过函数，进行自由置换"><span class="nav-number">2.5.1.</span> <span class="nav-text">replace的强大之处在于可以对满足正则表达式的字符，通过函数，进行自由置换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replace与match一样，都有全局非全局模式。"><span class="nav-number">2.5.2.</span> <span class="nav-text">replace与match一样，都有全局非全局模式。</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cyberpunk</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cyberpunk"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

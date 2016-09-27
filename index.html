@@ -237,6 +237,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/09/27/Javascript-正则函数与字符串函数分析/" itemprop="url">
+                  Javascript 正则函数与字符串函数分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-27T18:16:07+08:00" content="2016-09-27">
+              2016-09-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web前端/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/27/Javascript-正则函数与字符串函数分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/27/Javascript-正则函数与字符串函数分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>目标：彻底搞清楚String的match、replace、search 和 RegExp的test、exec</p>
+<hr>
+<h2 id="一、String的match-与-RegExp的exec-比较："><a href="#一、String的match-与-RegExp的exec-比较：" class="headerlink" title="一、String的match() 与 RegExp的exec()比较："></a>一、String的match() 与 RegExp的exec()比较：</h2><h3 id="1、String-prototype-match"><a href="#1、String-prototype-match" class="headerlink" title="1、String.prototype.match()"></a>1、String.prototype.match()</h3><ul>
+<li>Syntax:     str.match(regexp)</li>
+<li>Return:     返回整个匹配到的结果 和 所有分组匹配到的结果，若匹配不到，则返回null</li>
+</ul>
+<p>如果regexp不包含g(全局匹配)，则与RegExp.exec(str)的结果一致返回的数组有一个额外的属性input：包含原始匹配的文本还有一个属性index：包含第一次匹配到的文本的下标<br>测试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2012-04-06 12:30:30"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = test_string.match(reg);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;2013&quot;, index: 0, input: &quot;2013-09-20 23:21:05&quot;]</span><br></pre></td></tr></table></figure>
+<p>如果regexp包含g，则返回一个包含所有匹配到的结果的数组<br>测试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d+/g</span>;</span><br><span class="line"><span class="keyword">var</span> test_string = <span class="string">"2012-04-06 12:30:30"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = test_string.match(reg);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res);</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;2013&quot;, &quot;09&quot;, &quot;20&quot;, &quot;23&quot;, &quot;21&quot;, &quot;05&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。"><a href="#从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。" class="headerlink" title="从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。"></a>从上面可以看出，g标志符对于结果影响很大。可以理解为g使match在遍历全部文本，找出所有符合条件的文本。</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/09/27/Javascript-正则函数与字符串函数分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/13/项目积累：微信端-逅续积分-外包-总结/" itemprop="url">
                   项目积累：微信端'逅续积分'外包 总结
                 </a>
@@ -1140,7 +1275,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1157,7 +1292,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
